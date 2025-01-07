@@ -1,6 +1,7 @@
 package com.myjar.jarassignment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -22,9 +23,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LaunchedEffect(Unit) {
+            Log.d("TAG1", viewModel.listStringData.toString())
+
+            LaunchedEffect(viewModel.listStringData) {
                 viewModel.fetchData()
             }
+            Log.d("TAG2", viewModel.listStringData.toString())
             JarAssignmentTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     AppNavigation(

@@ -1,5 +1,6 @@
 package com.myjar.jarassignment.ui.vm
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.myjar.jarassignment.createRetrofit
@@ -18,9 +19,13 @@ class JarViewModel : ViewModel() {
 
     private val repository: JarRepository = JarRepositoryImpl(createRetrofit())
 
-    fun fetchData() {
+    fun fetchData() : List<ComputerItem>{
         viewModelScope.launch {
             repository.fetchResults()
         }
+        Log.d("TAG1 - JarVM", listStringData.toString())
+    }
+    init {
+        _listStringData.value = fetchData()
     }
 }
